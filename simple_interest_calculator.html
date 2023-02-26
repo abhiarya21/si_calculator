@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Interest Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      #result {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simple Interest Calculator</h1>
+    <form onsubmit="event.preventDefault(); calculate();">
+      <label for="principal">Principal Amount:</label>
+      <input type="number" id="principal" name="principal" required>
+
+      <label for="rate">Interest Rate:</label>
+      <input type="number" id="rate" name="rate" step="0.01" required>
+
+      <label for="years">Years(0 if not applicable):</label>
+      <input type="number" id="years" name="years" required>
+
+      <label for="months">Months(0 if not applicable):</label>
+      <input type="number" id="months" name="months">
+
+      <label for="days">Days(0 if not applicable):</label>
+      <input type="number" id="days" name="days">
+
+      <label for="weeks">Weeks(0 if not applicable):</label>
+      <input type="number" id="weeks" name="weeks">
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+      function calculate() {
+        // get input values
+        var principal = document.getElementById("principal").value;
+        var rate = document.getElementById("rate").value;
+        var years = document.getElementById("years").value;
+        var months = document.getElementById("months").value;
+        var days = document.getElementById("days").value;
+        var weeks = document.getElementById("weeks").value;
+
+        // convert time into years
+        var time = parseFloat(years) + parseFloat(months / 12) + parseFloat(weeks / 52) + parseFloat(days / 365);
+
+        // calculate simple interest
+        var interest = (principal * rate * time) / 100;
+
+        // calculate total amount
+        var total = parseFloat(principal) + parseFloat(interest);
+
+        // display result
+        var result = document.getElementById("result");
+        result.innerHTML = "<p>Simple Interest: " + interest.toFixed(2) + "</p>" +
+                           "<p>Total Amount: " + total.toFixed(2) + "</p>";
+      }
+    </script>
